@@ -1,5 +1,6 @@
 package com.LiterAlura;
 
+import com.LiterAlura.MenuPrincipal.MenuPrincipal;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +16,9 @@ public class LiterAluraApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("Teste Config");
+
+		MenuPrincipal menu = new MenuPrincipal();
+		menu.MenuAplicacao();
+
 	}
 }
