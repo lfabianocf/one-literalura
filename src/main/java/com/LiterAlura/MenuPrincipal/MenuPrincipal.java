@@ -4,6 +4,7 @@ package com.LiterAlura.MenuPrincipal;
 import com.LiterAlura.model.Autor;
 import com.LiterAlura.model.DadosLivro;
 import com.LiterAlura.model.Livro;
+import com.LiterAlura.repository.LivroRepository;
 import com.LiterAlura.service.ConverteDados;
 import com.LiterAlura.service.RequisicaoApi;
 import org.hibernate.event.spi.SaveOrUpdateEvent;
@@ -25,6 +26,12 @@ public class MenuPrincipal {
     private List<Livro> livros;
 
     private List<Autor> autores;
+
+    private LivroRepository livroRepository;
+
+    public MenuPrincipal(LivroRepository livroRepository) {
+        this.livroRepository = livroRepository;
+    }
 
     /*
       Menu com opções do console para API de Livros Guntendex
@@ -102,6 +109,7 @@ public class MenuPrincipal {
        System.out.println("Número de Download: " + livro.getContDownloads());
        System.out.println("*-*-*-*-*-*-*-*");
 
+       livroRepository.save(livro);
 
 
    }
