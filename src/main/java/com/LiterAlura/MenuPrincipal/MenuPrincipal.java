@@ -204,6 +204,30 @@ public class MenuPrincipal {
     private void pesquisarAutorPorAno() {
 
         System.out.println("Pesquisa Autor por ano");
+        System.out.println("Digite o ano a ser pesquisado");
+
+        var ano = leitura.nextInt();
+        leitura.nextLine();
+
+        List<Autor> autores = autorRepository.autorPorAno(ano);
+
+        System.out.println(autores);
+        autores.stream().forEach(a ->
+                System.out.println("""
+                          *-*-*-* Autores Catalogados *-*-*-*-*
+                          Autor: %s
+                          Ano de Nascimento: %s
+                          Ano de Falecimento: %s
+                          *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+                          """.formatted(
+                                a.getNomeAutor(),
+                                a.getDataNascimento(),
+                                a.getDataFalecimento()
+                        )
+                )
+        );
+
+
     }
 
     /**

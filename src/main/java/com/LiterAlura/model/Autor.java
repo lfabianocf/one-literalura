@@ -12,14 +12,14 @@ public class Autor {
 
     private String nomeAutor;
 
-    private Integer dataNascimento;
+    private Integer anoNascimento;
 
-    private Integer dataFalecimento;
+    private Integer anoFalecimento;
 
     public Autor(DadosAutor dadosAutor) {
         this.nomeAutor = dadosAutor.nomeAutor();
-        this.dataNascimento = dadosAutor.anoNascimento();
-        this.dataFalecimento = dadosAutor.anoFalecimento();
+        this.anoNascimento = dadosAutor.anoNascimento();
+        this.anoFalecimento = dadosAutor.anoFalecimento();
     }
 
     public Autor() {
@@ -42,27 +42,27 @@ public class Autor {
     }
 
     public Integer getDataNascimento() {
-        return dataNascimento;
+        return anoNascimento;
     }
 
     public void setDataNascimento(Integer dataNascimento) {
-        this.dataNascimento = dataNascimento;
+        this.anoNascimento = dataNascimento;
     }
 
     public Integer getDataFalecimento() {
-        return dataFalecimento;
+        return anoFalecimento;
     }
 
     public void setDataFalecimento(Integer dataFalecimento) {
-        this.dataFalecimento = dataFalecimento;
+        this.anoFalecimento = dataFalecimento;
     }
 
     @Override
     public String toString() {
         return "Autor{" +
                 "nomeAutor='" + nomeAutor + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", dataFalecimento=" + dataFalecimento +
+                ", dataNascimento=" + anoNascimento +
+                ", dataFalecimento=" + anoFalecimento +
                 '}';
     }
 }
