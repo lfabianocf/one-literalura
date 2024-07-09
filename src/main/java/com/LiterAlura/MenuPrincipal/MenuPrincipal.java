@@ -8,7 +8,9 @@ import com.LiterAlura.repository.AutorRepository;
 import com.LiterAlura.repository.LivroRepository;
 import com.LiterAlura.service.ConverteDados;
 import com.LiterAlura.service.RequisicaoApi;
+import org.hibernate.type.descriptor.sql.internal.Scale6IntervalSecondDdlType;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -234,7 +236,46 @@ public class MenuPrincipal {
      *  Método exiber livro por Idioma
      */
     private void listarLivrosProIdioma() {
-        System.out.println("Livro por idioma");
+
+        System.out.println("""
+                    *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+                    *-*-*-*     Listar livros por determinado idioma    *-*-*-*
+                    *-*-*-*        informa sigla do idioma              *-*-*-*
+                    *-*-*-*        en - Inglês                          *-*-*-*
+                    *-*-*-*        es - espanhol                        *-*-*-*
+                    *-*-*-*        fr - francês                         *-*-*-*
+                    *-*-*-*        pt - português                       *-*-*-*
+                     *-*-*-*       0 - Retorna menu                    *-*-*-*
+                """);
+
+
+            var siglaIdioma = leitura.nextLine();
+
+
+            switch (siglaIdioma) {
+
+                case "en":
+                    livros = livroRepository.findBylinguagem("en");
+                    livros.stream().forEach(System.out::println);
+                    break;
+                case "es":
+                    livros = livroRepository.findBylinguagem("es");
+                    livros.stream().forEach(System.out::println);
+                    break;
+                case "fr":
+                    livros = livroRepository.findBylinguagem("fr");
+                    livros.stream().forEach(System.out::println);
+                    break;
+                case "pt":
+                    livros = livroRepository.findBylinguagem("pt");
+                    livros.stream().forEach(System.out::println);
+                    break;
+                case "0":
+                    break;
+                default:
+                    System.out.println("Entre com uma opção valida!");
+
+            }
     }
 
 }
