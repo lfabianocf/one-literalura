@@ -56,4 +56,13 @@ public class Livro {
     public void setContDownloads(Integer contDownloads) {
         this.contDownloads = contDownloads;
     }
+
+    @Override
+    public String toString() {
+        return " titulo=" + titulo + '\'' +
+                ", nomeAutor='" + nomeAutor + '\'' +
+                ", linguagem='" + linguagem + '\'' +
+                ", contDownloads=" + contDownloads
+                ;
+    }
 }

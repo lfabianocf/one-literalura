@@ -4,12 +4,12 @@ package com.LiterAlura.MenuPrincipal;
 import com.LiterAlura.model.Autor;
 import com.LiterAlura.model.DadosLivro;
 import com.LiterAlura.model.Livro;
+import com.LiterAlura.repository.AutorRepository;
 import com.LiterAlura.repository.LivroRepository;
 import com.LiterAlura.service.ConverteDados;
 import com.LiterAlura.service.RequisicaoApi;
-import org.hibernate.event.spi.SaveOrUpdateEvent;
 
-import javax.xml.transform.Source;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,8 +29,11 @@ public class MenuPrincipal {
 
     private LivroRepository livroRepository;
 
-    public MenuPrincipal(LivroRepository livroRepository) {
+    private AutorRepository autorRepository;
+
+    public MenuPrincipal(LivroRepository livroRepository, AutorRepository autorRepository) {
         this.livroRepository = livroRepository;
+        this.autorRepository = autorRepository;
     }
 
     /*
@@ -110,6 +113,7 @@ public class MenuPrincipal {
        System.out.println("*-*-*-*-*-*-*-*");
 
        livroRepository.save(livro);
+       autorRepository.save(autor);
 
 
    }
@@ -139,7 +143,32 @@ public class MenuPrincipal {
      *  Método exebi os livros da base de dados
      */
     private void listarLivros() {
+
         System.out.println("Livros registrado no LiterAlura");
+
+        List<Livro> livros = livroRepository.findAll();
+
+        //System.out.println("*-*-*-*-*-* Livro *-*-*-*-*-*" + livros.toString());
+
+        livros.stream().forEach(l -> {
+            System.out.println("""
+                *-*-*-* Livros Catalogaos *-*-*-*-*    
+                    Título: %s
+                    Autor: %s
+                    Linguagem: %s
+                    Downloads: %s
+                *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+                    """.formatted(
+                            l.getTitulo(),
+                            l.getNomeAutor(),
+                            l.getLinguagem(),
+                            l.getContDownloads()
+                            .toString()
+
+            ));
+        });
+
     }
 
     /**
