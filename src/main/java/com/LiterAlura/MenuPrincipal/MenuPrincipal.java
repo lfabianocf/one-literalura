@@ -9,7 +9,6 @@ import com.LiterAlura.repository.LivroRepository;
 import com.LiterAlura.service.ConverteDados;
 import com.LiterAlura.service.RequisicaoApi;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -175,14 +174,36 @@ public class MenuPrincipal {
      * Métddo exebir os autores
      */
     private void listarAutores() {
-        System.out.println("litagem de autores");
+
+       System.out.println("Autores registrado no LiterAlura");
+
+       List<Autor> autores = autorRepository.findAll();
+
+        autores.forEach(System.out::println);
+
+        autores.stream().forEach(a ->
+                        System.out.println("""
+                          *-*-*-* Autores Catalogaos *-*-*-*-*
+                          Autor: %s
+                          Ano de Nascimento: %s
+                          Ano de Falecimento: %s
+                          """.formatted(
+                                a.getNomeAutor(),
+                                a.getDataNascimento(),
+                                a.getDataFalecimento()
+                                )
+                        )
+                );
+
+
     }
 
     /**
      * Método exevir autores por ano
      */
     private void pesquisarAutorPorAno() {
-        System.out.println("Autores por ano");
+
+        System.out.println("Pesquisa Autor por ano");
     }
 
     /**

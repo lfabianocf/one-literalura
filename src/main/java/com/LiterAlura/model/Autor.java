@@ -56,4 +56,13 @@ public class Autor {
     public void setDataFalecimento(Integer dataFalecimento) {
         this.dataFalecimento = dataFalecimento;
     }
+
+    @Override
+    public String toString() {
+        return "Autor{" +
+                "nomeAutor='" + nomeAutor + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", dataFalecimento=" + dataFalecimento +
+                '}';
+    }
 }
