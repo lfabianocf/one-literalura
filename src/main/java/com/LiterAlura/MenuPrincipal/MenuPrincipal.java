@@ -60,9 +60,13 @@ public class MenuPrincipal {
                     *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
                     """;
 
-            System.out.println(menu);
-            opcao = leitura.nextInt();
-            leitura.nextLine();
+            try {
+                System.out.println(menu);
+                opcao = leitura.nextInt();
+                leitura.nextLine();
+            } catch (Exception ex) {
+                System.out.println("Opção invalida. Tente novamente !");
+            }
 
             switch (opcao) {
                 case 1:
@@ -97,22 +101,27 @@ public class MenuPrincipal {
 
        DadosLivro  dadosLivro = getDadosLivro();
 
-       Livro livro = new Livro(dadosLivro.resultados().get(0));
+       if (dadosLivro.resultados().isEmpty()){
+           System.out.println("Livro não encontrado!");
+       } else {
 
-       Autor autor = new Autor(dadosLivro.resultados().get(0).listAutor().get(0));
+           Livro livro = new Livro(dadosLivro.resultados().get(0));
+
+           Autor autor = new Autor(dadosLivro.resultados().get(0).listAutor().get(0));
 
 
-      // System.out.println(livro.getTitulo());
+           // System.out.println(livro.getTitulo());
 
-       System.out.println("*-*-*-* LIVRO *-*-*-*");
-       System.out.println("Título: " + livro.getTitulo());
-       System.out.println("Autor: " + livro.getNomeAutor());
-       System.out.println("Idioma: " + livro.getLinguagem());
-       System.out.println("Número de Download: " + livro.getContDownloads());
-       System.out.println("*-*-*-*-*-*-*-*");
+           System.out.println("*-*-*-* LIVRO *-*-*-*");
+           System.out.println("Título: " + livro.getTitulo());
+           System.out.println("Autor: " + livro.getNomeAutor());
+           System.out.println("Idioma: " + livro.getLinguagem());
+           System.out.println("Número de Download: " + livro.getContDownloads());
+           System.out.println("*-*-*-*-*-*-*-*");
 
-       livroRepository.save(livro);
-       autorRepository.save(autor);
+           livroRepository.save(livro);
+           autorRepository.save(autor);
+       }
 
 
    }
