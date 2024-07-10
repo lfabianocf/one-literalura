@@ -8,9 +8,7 @@ import com.LiterAlura.repository.AutorRepository;
 import com.LiterAlura.repository.LivroRepository;
 import com.LiterAlura.service.ConverteDados;
 import com.LiterAlura.service.RequisicaoApi;
-import org.hibernate.type.descriptor.sql.internal.Scale6IntervalSecondDdlType;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -79,7 +77,7 @@ public class MenuPrincipal {
                 case 4:
                     pesquisarAutorPorAno();
                 case 5:
-                    listarLivrosProIdioma();
+                    listarLivrosPorIdioma();
                     break;
                 case 0:
                     System.out.println("Saindo da aplicação!!!");
@@ -135,7 +133,7 @@ public class MenuPrincipal {
 
         DadosLivro  dadosLivro = converteDados.obterDados(json, DadosLivro.class);
 
-        System.out.println(dadosLivro);
+        //System.out.println(dadosLivro);
 
         return  dadosLivro;
     }
@@ -147,7 +145,8 @@ public class MenuPrincipal {
 
         System.out.println("Livros registrado no LiterAlura");
 
-        List<Livro> livros = livroRepository.findAll();
+        //List<Livro> livros = livroRepository.findAll();
+        livros = livroRepository.findAll();
 
         //System.out.println("*-*-*-*-*-* Livro *-*-*-*-*-*" + livros.toString());
 
@@ -179,7 +178,9 @@ public class MenuPrincipal {
 
        System.out.println("Autores registrado no LiterAlura");
 
-       List<Autor> autores = autorRepository.findAll();
+       //List<Autor> autores = autorRepository.findAll();
+
+       autores = autorRepository.findAll();
 
         autores.forEach(System.out::println);
 
@@ -211,7 +212,8 @@ public class MenuPrincipal {
         var ano = leitura.nextInt();
         leitura.nextLine();
 
-        List<Autor> autores = autorRepository.autorPorAno(ano);
+        //List<Autor> autores = autorRepository.autorPorAno(ano);
+        autores = autorRepository.autorPorAno(ano);
 
         System.out.println(autores);
         autores.stream().forEach(a ->
@@ -228,16 +230,13 @@ public class MenuPrincipal {
                         )
                 )
         );
-
-
+        MenuAplicacao();
     }
 
     /**
      *  Método exiber livro por Idioma
      */
-    private void listarLivrosProIdioma() {
-
-
+    private void listarLivrosPorIdioma() {
 
         System.out.println("""
                     *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
