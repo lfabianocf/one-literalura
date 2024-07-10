@@ -57,7 +57,7 @@ public class MenuPrincipal {
                     *-*-*-*        2 - Listar Livros Regitrados                     *-*-*-*
                     *-*-*-*        3 - Listar Autores registrados                   *-*-*-*
                     *-*-*-*        4 - Listar Autores Vivos em determinado ano      *-*-*-*
-                    *-*-*-*        5 - Listar livor por Idioma                      *-*-*-*
+                    *-*-*-*        5 - Listar livro por Idioma                      *-*-*-*
                     *-*-*-*        0 - Sair                                         *-*-*-*
                     *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
                     """;
@@ -237,6 +237,8 @@ public class MenuPrincipal {
      */
     private void listarLivrosProIdioma() {
 
+
+
         System.out.println("""
                     *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
                     *-*-*-*     Listar livros por determinado idioma    *-*-*-*
@@ -248,6 +250,7 @@ public class MenuPrincipal {
                      *-*-*-*       0 - Retorna menu                    *-*-*-*
                 """);
 
+        try {
 
             var siglaIdioma = leitura.nextLine();
 
@@ -256,26 +259,51 @@ public class MenuPrincipal {
 
                 case "en":
                     livros = livroRepository.findBylinguagem("en");
-                    livros.stream().forEach(System.out::println);
                     break;
                 case "es":
                     livros = livroRepository.findBylinguagem("es");
-                    livros.stream().forEach(System.out::println);
                     break;
                 case "fr":
                     livros = livroRepository.findBylinguagem("fr");
-                    livros.stream().forEach(System.out::println);
+                    System.out.println(siglaIdioma);
                     break;
                 case "pt":
                     livros = livroRepository.findBylinguagem("pt");
-                    livros.stream().forEach(System.out::println);
+                    System.out.println(siglaIdioma);
                     break;
                 case "0":
                     break;
                 default:
-                    System.out.println("Entre com uma opção valida!");
+                    System.out.println("Entre com uma sigla valida!");
 
             }
-    }
 
+            if (!livros.isEmpty()) {
+
+                livros.stream().forEach(l -> {
+                    System.out.println("""
+                *-*-*-* Livros Catalogaos *-*-*-*-*
+                    Título: %s
+                    Autor: %s
+                    Linguagem: %s
+                    Downloads: %s
+                *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+                """.formatted(
+                            l.getTitulo(),
+                            l.getNomeAutor(),
+                            l.getLinguagem(),
+                            l.getContDownloads()
+                                    .toString()
+
+                    ));
+                });
+            } else {
+                System.out.println("Livro não encontrado para idioma !");
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Opção invalida. Tente novamente!");
+        }
+    }
 }
